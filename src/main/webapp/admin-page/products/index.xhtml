@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>#{lang['product.title']}</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/templates/base.xhtml">
+            <ui:define name="slide">
+            </ui:define>
+            <ui:define name="info">
+                <div class="container" id="margin-admin">
+                    <div class="title">
+                        <h1>#{lang['product.title']} </h1>
+                        <hr/>
+                    </div>
+                    <center>
+                        <h:link class="btn btn-warning btn-sm" 
+                                value="#{lang['create']}" 
+                                outcome="create?faces-redirect=true&amp;product_id=#{pro.id}" 
+                                />
+                    </center>
+                    <br/>
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col">#{lang['product.id']}</th>
+                                <th scope="col">#{lang['product.name']}</th>
+                                <th scope="col">#{lang['navbar.categories']}</th>
+                                <th scope="col">#{lang['product.price']}</th>
+                                <th scope="col">#{lang['action']}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="pro" items="#{productBean.products}">
+                                <tr>
+                                    <th scope="row">#{pro.id}</th>
+                                    <td>#{pro.name}</td>
+                                    <td>#{pro.category.name}</td>
+                                    <td>#{pro.price}</td>
+                                    <td>
+                                        <h:form>
+                                            <h:link class="btn btn-primary btn-sm" 
+                                                    value="#{lang['edit']}" 
+                                                    outcome="update?faces-redirect=true&amp;product_id=#{pro.id}" 
+                                                    />
+                                            <h:commandLink value="#{lang['remove']}"
+                                                            styleClass="btn btn-danger btn-sm">
+                                                <f:ajax listener="#{productBean.removeProduct(pro)}"
+                                                        onevent="removeSuccess"
+                                                        onerror="removeError"/>  
+                                            </h:commandLink>
+                                        </h:form>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+                <script>
+                    function removeSuccess() {
+                        location.reload();
+                    }
+                    
+                    function removeError() {
+                        alert("Something wrong!!!");
+                    }
+                </script>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

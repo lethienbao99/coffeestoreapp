@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Create Product</title>
+        
+    </h:head>
+    <h:body>
+        <ui:composition template="/templates/base.xhtml">
+            <ui:define name="slide">
+            </ui:define>
+            <ui:define name="info">
+                <div class="container" id="margin-admin">
+                    <h:form enctype="multipart/form-data">
+                        <div class="title">
+                            <h1>Create Product </h1>
+                            <hr/>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel value="#{lang['product.name']}"/>
+                            <h:inputText id="txtName" 
+                                         value="#{productBean.name}"
+                                         styleClass="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel value="#{lang['product.categories']}"/>
+                            <h:selectOneMenu id="txtCategory" 
+                                             value="#{productBean.category}"
+                                             converter="CategoryConverter"
+                                             styleClass="form-control">
+                                <f:selectItems var="cat" 
+                                               value="#{categoryBean.categories}"
+                                               itemLabel="#{cat.name}" 
+                                               itemValue="#{cat}"
+                                               />
+                            </h:selectOneMenu>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel value="#{lang['product.description']}"/>
+                            <h:inputTextarea id="txtDescription"
+                                             value="#{productBean.description}"
+                                             styleClass="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel value="#{lang['product.price']}"/>
+                            <h:inputText id="txtPrice"
+                                         value="#{productBean.price}"
+                                         styleClass="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel value="#{lang['product.image']}"/>
+                            <h:inputFile styleClass="form-control-file" 
+                                         id="fileImg"
+                                         value="#{productBean.imgFile}"
+                                         />
+                            <h:message for="fileImg"/>
+                        </div>
+                        <h:commandButton value="Add"
+                                         action="#{productBean.addOrSaveProduct()}"
+                                         styleClass="btn btn-success"/>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
