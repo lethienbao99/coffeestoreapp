@@ -1,0 +1,9 @@
+com\csa\bean\CategoryBean.class
+com\csa\validator\UploadValidator.class
+com\csa\pojo\Product.class
+com\csa\pojo\Category.class
+com\csa\services\CategorySvc.class
+com\csa\services\ProductSvc.class
+com\csa\coffeestoreapp\HibernateUtil.class
+com\csa\converter\CategoryConverter.class
+com\csa\bean\ProductBean.class

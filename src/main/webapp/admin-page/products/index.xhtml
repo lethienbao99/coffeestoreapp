@@ -21,7 +21,7 @@
                     <center>
                         <h:link class="btn btn-warning btn-sm" 
                                 value="#{lang['create']}" 
-                                outcome="create?faces-redirect=true&amp;product_id=#{pro.id}" 
+                                outcome="CreateOrUpdate?faces-redirect=true&amp;product_id=#{pro.id}" 
                                 />
                     </center>
                     <br/>
@@ -46,7 +46,7 @@
                                         <h:form>
                                             <h:link class="btn btn-primary btn-sm" 
                                                     value="#{lang['edit']}" 
-                                                    outcome="update?faces-redirect=true&amp;product_id=#{pro.id}" 
+                                                    outcome="CreateOrUpdate?faces-redirect=true&amp;product_id=#{pro.id}" 
                                                     />
                                             <h:commandLink value="#{lang['remove']}"
                                                             styleClass="btn btn-danger btn-sm">
