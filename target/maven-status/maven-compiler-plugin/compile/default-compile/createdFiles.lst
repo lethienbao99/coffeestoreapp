@@ -1,3 +1,4 @@
+com\csa\bean\CartBean.class
 com\csa\bean\CategoryBean.class
 com\csa\validator\UploadValidator.class
 com\csa\pojo\Product.class

@@ -1,12 +1,58 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>List Product</title>
-    </h:head>
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:body>
-        test
+        <ui:composition template="/templates/base.xhtml">
+            <ui:define name="title"> COFFEESTOREWEB</ui:define>
+            <ui:define name="slide">
+            </ui:define>
+
+            <ui:define name="info">
+                <div class="title" id="margin-admin">
+                    <h1>#{lang['navbar.allproduct']}</h1>
+                    <hr/>
+                    <br/>
+                </div>
+                <!--Movie list-->
+                <div class="page-single movie_list">
+                    <div class="container">
+                        <div class="row ipad-width2">
+                            <div class="col-md-8 col-sm-12 col-xs-12">
+                                <c:forEach var="pro" items="#{productBean.products}">
+
+                                    <div class="movie-item-style-2">
+                                        <h:graphicImage library="images" styleClass="card-img-top"
+                                                        name="#{pro.image}" 
+                                                        alt="#{pro.name}"/>
+                                        <div class="mv-item-infor" style="color: white">
+                                            <h6>
+                                                <a>
+                                                    <h:link outcome="detail?faces-redirect=true&amp;product_id=#{pro.id}"
+                                                            >
+                                                        #{pro.name}
+                                                    </h:link>
+                                                </a>
+                                            </h6>
+                                            <p class="rate"><i class="fas fa-star"></i><span> 10 </span> /10</p>
+                                            <p class="genres">#{pro.category.name}</p>
+                                            <p>Release: 2020</p>
+                                            <p>Price: #{pro.price} VND</p>
+                                            <button href="#" 
+                                                    class="btn btn-outline-warning"
+                                                    data-toggle="modal" 
+                                                    data-target="#cartModal">BUY IT</button>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

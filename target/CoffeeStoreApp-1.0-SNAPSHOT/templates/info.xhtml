@@ -2,9 +2,10 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
     <div class="title">
-        <h1>Tittlea </h1>
+        <h1>SPECIAL</h1>
         <hr/>
     </div>
     <div id="container" class="main">
@@ -24,7 +25,6 @@
                                 <h:link outcome="products/detail?faces-redirect=true&amp;product_id=#{pro.id}">
                                     #{pro.name}
                                 </h:link>
-                                
                             </a>
                         </p>
                         <p id="textcategory">
@@ -36,19 +36,21 @@
                     </p>
                     <p class="buy" id="buy">
                         <button type="button" 
-                                class="btn btn-warning">
+                                class="btn btn-warning"
+                                data-toggle="modal" 
+                                data-target="#cartModal">
                             <svg width="1em" 
                                  height="1em" 
                                  viewBox="0 0 16 16" 
                                  class="bi bi-cart" 
-                                 fill="currentColor" >
+                                 fill="currentColor">
                                 <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
                             </svg>
+                            <f:ajax listener="#{cartBean.addItemtoCart(1, '', q)}"/>
                         </button>
                     </p>
                 </div>
             </h:link>
         </c:forEach>
-
     </div>
 </ui:composition>

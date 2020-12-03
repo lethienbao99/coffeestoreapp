@@ -10,12 +10,15 @@ and open the template in the editor.
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Home page</title>
+        <title><ui:insert name="title">HOME - COFFEESTOREWEB</ui:insert></title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"/>
         <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&#38;display=swap" rel="stylesheet"/>
-        <h:outputStylesheet name="style.css" library="css"/>
+        <ui:insert name="css">
+               <h:outputStylesheet name="style.css" library="css"/>
+                    <h:outputStylesheet name="productlist.css" library="css"/>
+        </ui:insert>
         <script>
         window.addEventListener("scroll", function () {
             var header = document.querySelector("header");

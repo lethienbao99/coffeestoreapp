@@ -5,11 +5,11 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <title>#{lang['product.title']}</title>
-    </h:head>
     <h:body>
         <ui:composition template="/templates/base.xhtml">
+            <ui:define name="title">
+                #{lang['product.title']}
+            </ui:define>
             <ui:define name="slide">
             </ui:define>
             <ui:define name="info">
@@ -49,7 +49,7 @@
                                                     outcome="CreateOrUpdate?faces-redirect=true&amp;product_id=#{pro.id}" 
                                                     />
                                             <h:commandLink value="#{lang['remove']}"
-                                                            styleClass="btn btn-danger btn-sm">
+                                                           styleClass="btn btn-danger btn-sm">
                                                 <f:ajax listener="#{productBean.removeProduct(pro)}"
                                                         onevent="removeSuccess"
                                                         onerror="removeError"/>  
