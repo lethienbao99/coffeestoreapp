@@ -27,6 +27,7 @@ public class ProductSvc {
             CriteriaBuilder builder = session.getCriteriaBuilder();
             CriteriaQuery<Product> query = builder.createQuery(Product.class);
             Root<Product> root = query.from(Product.class);
+            query.orderBy(builder.desc(root.get("id")));
             query.select(root);
 
             if (kw != null && kw.isEmpty()) {

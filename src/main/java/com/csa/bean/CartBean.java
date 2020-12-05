@@ -9,12 +9,13 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-
 
 /**
  *
@@ -30,7 +31,7 @@ public class CartBean implements Serializable {
      */
     public CartBean() {
     }
-    
+
     @PostConstruct
     public void init() {
         if (FacesContext.getCurrentInstance()
@@ -41,26 +42,47 @@ public class CartBean implements Serializable {
                     .getSessionMap().put("cart", new HashMap<>());
         }
     }
-    
-    public String addItemtoCart(int productId, String productName, BigDecimal price) {
-        Map<Integer, Object> cart;
-        cart = (Map<Integer, Object>) FacesContext.getCurrentInstance()
+
+    public List<Map<String, Object>> getCarts() {
+        Map<Integer, Object> cart = (Map<Integer, Object>) FacesContext
+                .getCurrentInstance()
+                .getExternalContext()
+                .getSessionMap()
+                .get("cart");
+        List<Map<String, Object>> kq = new ArrayList<>();
+        for (Object o : cart.values()) {
+            Map<String, Object> d = (Map<String, Object>) o;
+
+            kq.add(d);
+        }
+
+        return kq;
+    }
+
+    public String addItemtoCart(int productId, String productName, BigDecimal price, String image) {
+        Map<Integer, Object> cart = (Map<Integer, Object>) FacesContext
+                .getCurrentInstance()
                 .getExternalContext()
                 .getSessionMap().get("cart");
+
         if (cart.get(productId) == null) {
+            //Nếu chưa có sp thì tạo mới 1 sp vô cart
             Map<String, Object> d = new HashMap<>();
             d.put("productId", productId);
             d.put("productName", productName);
-            d.put("price", price);
+
+            d.put("productPrice", price);
+            d.put("image", image);
             d.put("count", 1);
-            
+
             cart.put(productId, d);
-        }
-        else  {
+
+        } else {
             Map<String, Object> d = (Map<String, Object>) cart.get(productId);
-            d.put("count",Integer.parseInt(d.get("count").toString()) + 1);
+            d.put("count", Integer.parseInt(d.get("count").toString()) + 1);
         }
+
         return "";
     }
-    
+
 }

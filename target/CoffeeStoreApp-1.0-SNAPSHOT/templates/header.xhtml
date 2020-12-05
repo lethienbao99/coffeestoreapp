@@ -2,14 +2,20 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-                xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <header>
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <header class="py-0">
         <a class="logo" href="/CoffeeStoreApp">
             <h1>Coffee Store Web</h1>
         </a>
         <nav>
             <ul class="nav_links">
                 <li><a href="#">#{lang['navbar.home']}</a></li>
+                <li>
+                    <span data-toggle="modal" data-target="#cartModal">
+                        <a href="#">Cart</a>
+                    </span>
+                </li>
                 <li><a href="/CoffeeStoreApp/faces/products/list.xhtml">#{lang['navbar.allproduct']}</a></li>
                 <li>
                     <div class="dropdown">
@@ -44,34 +50,42 @@
                 <div class="modal-content" style="color: black;">
                     <h5 style="margin: 11px;">YOUR CART</h5>
                     <div class="modal-body">
-                        <table class="table table-image">
-                            <thead>
-                                <tr>
-                                    <th scope="col"></th>
-                                    <th scope="col">Product</th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col">Qty</th>
-                                    <th scope="col">Total</th>
-                                    <th scope="col">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="w-25">
-                                        <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/vans.png" class="img-fluid img-thumbnail" alt="Sheep"/>
-                                    </td>
-                                    <td>Vans Sk8-Hi MTE Shoes</td>
-                                    <td>89$</td>
-                                    <td class="qty"><input type="text" class="form-control" id="input1" value="2"/></td>
-                                    <td>178$</td>
-                                    <td>
-                                        <a href="#" class="btn btn-danger btn-sm">
-                                            <i class="fa fa-times"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table> 
+
+                        <h:dataTable styleClass="table table-image"
+                                     id="datamodal"
+                                     var="cart" value="#{cartBean.carts}">
+                            <h:column>
+                                <f:facet name="header">Mã sản phẩm</f:facet>
+                                    #{cart['productId']}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Hình ảnh</f:facet>
+                                <h:graphicImage library="images" name="#{cart['image']}"  width="15px" 
+                                                height="15px">  
+                                </h:graphicImage>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Tên sản phẩm</f:facet>
+                                    #{cart['productName']}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Số lượng</f:facet>
+                                    #{cart['count']}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">ACtion</f:facet>
+                                <button onclick="RemoveItem(#{cart['productId']})">
+                                    TEst
+                                </button>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Thành tiền</f:facet>
+                                    #{cart['productPrice']}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header" ></f:facet>
+                            </h:column>
+                        </h:dataTable>    
                         <div class="d-flex justify-content-end">
                             <h5>Total: <span class="pricemodal text-success">89$</span></h5>
                         </div>
@@ -86,8 +100,13 @@
             <script>
                 $(document).ready(function() {  
                     $('#cartModal').modal('show');
-                    });
+                    });  
+                    
+                    function RemoveItem(Id) {
+                        alert(Id);
+                    }
+
             </script>
-            </div>
+        </div>
     </header>
 </ui:composition>

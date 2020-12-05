@@ -88,6 +88,10 @@ header.sticky ul.nav_links li a:hover {
     color: #FFFF00;
 }
 
+.imgSlide{
+    object-fit: cover;
+}
+
 button {
     color: black;
     padding: 9px 25px;
