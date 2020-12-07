@@ -36,7 +36,7 @@
                     </p>
                     <h:form>
                         <p class="buy" id="buy">
-                            <h:commandButton value="test" styleClass="btn btn-warning" onclick="reload()">
+                            <h:commandButton value="Cart" styleClass="btn btn-warning" onclick="reload()">
                                 <f:ajax listener="#{cartBean.addItemtoCart(pro.id, pro.name, pro.price, pro.image)}"/>
                             </h:commandButton>
                             <script>

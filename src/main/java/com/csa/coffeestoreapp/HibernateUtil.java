@@ -7,6 +7,7 @@ package com.csa.coffeestoreapp;
 
 import com.csa.pojo.Category;
 import com.csa.pojo.Product;
+import com.csa.pojo.User;
 import java.util.Properties;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -33,6 +34,7 @@ public class HibernateUtil {
         conf.setProperties(pros);
         conf.addAnnotatedClass(Category.class);
         conf.addAnnotatedClass(Product.class);
+        conf.addAnnotatedClass(User.class);
 
 
         ServiceRegistry registry = new StandardServiceRegistryBuilder().applySettings(conf.getProperties()).build();
