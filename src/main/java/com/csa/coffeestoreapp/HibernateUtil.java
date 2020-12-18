@@ -6,6 +6,8 @@
 package com.csa.coffeestoreapp;
 
 import com.csa.pojo.Category;
+import com.csa.pojo.Orders;
+import com.csa.pojo.OrderDetail;
 import com.csa.pojo.Product;
 import com.csa.pojo.User;
 import java.util.Properties;
@@ -20,6 +22,7 @@ import org.hibernate.service.ServiceRegistry;
  * @author LTBao
  */
 public class HibernateUtil {
+
     private final static SessionFactory FACTORY;
 
     static {
@@ -35,12 +38,13 @@ public class HibernateUtil {
         conf.addAnnotatedClass(Category.class);
         conf.addAnnotatedClass(Product.class);
         conf.addAnnotatedClass(User.class);
-
+        conf.addAnnotatedClass(Orders.class);
+        conf.addAnnotatedClass(OrderDetail.class);
 
         ServiceRegistry registry = new StandardServiceRegistryBuilder().applySettings(conf.getProperties()).build();
 
         FACTORY = conf.buildSessionFactory(registry);
-            }
+    }
 
     public static SessionFactory getSessionFactory() {
         return FACTORY;

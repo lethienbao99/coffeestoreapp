@@ -36,7 +36,7 @@
                             <h:form>
                                 <i class='fas fa-address-book'></i> #{facesContext.externalContext.sessionMap.get("user").username}  
                                 |<h:commandLink action="#{userBean.logout()}">
-                                       Logout
+                                    Logout
                                 </h:commandLink>
                             </h:form>
                         </c:otherwise>
@@ -74,26 +74,29 @@
                                     #{cart['count']}
                             </h:column>
                             <h:column>
-                                <f:facet name="header">ACtion</f:facet>
+                                <f:facet name="header">Thành tiền</f:facet>
+                                    <span class="ttprice"> #{cart.productPrice * cart.count}</span>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Action</f:facet>
                                 <button id="buttonRemove" type="button" class="btn btn-danger" onclick="RemoveItem(#{cart['productId']})">
                                     TEst
                                 </button>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Thành tiền</f:facet>
-                                    #{cart['productPrice']}
                             </h:column>
                             <h:column>
                                 <f:facet name="header" ></f:facet>
                             </h:column>
                         </h:dataTable>    
                         <div class="d-flex justify-content-end">
-                            <h5>Total: <span class="pricemodal text-success">89$</span></h5>
+                            <h5>Total: <span class="pricemodal text-success" id="showTotal">$</span></h5>
                         </div>
                     </div>
                     <div class="modal-footer border-top-0 d-flex justify-content-between">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success">Checkout</button>
+                        <h:form>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <h:commandButton value="Checkout" action="#{orderBean.add()}" styleClass="btn btn-warning"/>
+                        </h:form>
+
                     </div>
                 </div>
             </div>
@@ -111,9 +114,14 @@
                             buttonClicked.parentElement.parentElement.remove();
                         });
                     }
-                    
-                    
-                
+                    // Tinh total trong cart
+                    var total = [...document.getElementsByClassName('ttprice')];
+                    var tong = 0;
+                    for (var i = 0; i &lt; total.length; i++) {
+                        var text = $(total[i])
+                        tong += parseInt(text.text())
+                    }
+                    document.getElementById('showTotal').innerHTML = tong.toLocaleString() + ' VND'
             </script>
         </div>
     </header>
